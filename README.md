@@ -1,8 +1,17 @@
 # mod_lbmethod_bysomekey
-Customerized load balancing algorithm for apache2
+Customerized load balancing algorithm for apache2 (httpd-2.4.34).
 
 # description
-load balancing according to some key in the request header or request query parameters.
+Load balancing according to some key in the request header or request query parameters.
+
+One specific key may be corresponding to multiple nodes.
+One node may contain multiple keys.
+
+If one key is already dispatched to one node, the next request with the same key may probably be disaptched to that node as well.
+However, if the node is extremely more busy than a given value, the request would be dispatched to an idle node or the least busy node.
+
+Hash-bucket data structure is used to store the key and node mapping relation.
+
 
 # build
 cd /home/apache_build/httpd-2.4.34/modules/proxy/balancers
